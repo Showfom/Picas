@@ -1,15 +1,12 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
 import Router from 'next/router'
-import withGA from 'next-ga'
 import groupBy from 'lodash.groupby'
 let WebFont;
-if (process.browser) {
+if (typeof window !== 'undefined') {
   WebFont = require('webfontloader')
 }
-
-import '../styles/index.scss'
 
 const { GOOGLE_FONT_API_KEY } = process.env
 
@@ -61,7 +58,7 @@ function saveSvg(svgData, fileName) {
   var svgUrl = URL.createObjectURL(svgBlob);
   var downloadLink = document.createElement("a");
   downloadLink.href = svgUrl;
-  downloadLink.download = `${fileName}.svg`;
+  downloadLink.download = `${fileName}-${fontFamily}.svg`;
   downloadLink.click();
 }
 
@@ -148,7 +145,7 @@ function Canvas({ text, color, width, height, fontSize, fontFamily, padding, bol
   function exportPNG() {
     const png = canvas.current.toDataURL('image/png')
     var link = document.createElement('a');
-    link.download = `${text}.png`;
+    link.download = `${text}-${fontFamily}.png`;
     link.href = png
     link.click()
   }
@@ -167,7 +164,7 @@ function Canvas({ text, color, width, height, fontSize, fontFamily, padding, bol
   )
 }
 
-function App({ fonts }) {
+export default function Home({ fonts }) {
   const [name, setName] = useInput('Picas')
   const [fontSize, setFontSize] = useInput(256)
   const [color, setColor] = useInput('#c62828')
@@ -188,7 +185,7 @@ function App({ fonts }) {
   const fontsByCategory = groupBy(fonts, 'category')
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>Picas - Generate Project Logo with Google Fonts</title>
       </Head>
@@ -266,7 +263,7 @@ function App({ fonts }) {
       <div className="is-size-7" style={{ textAlign: 'center', padding: '2rem' }}>
         Made by <a href="https://github.com/djyde">Randy</a>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
@@ -277,7 +274,7 @@ const cache = {
   data: []
 }
 
-App.getInitialProps = async function () {
+Home.getInitialProps = async function () {
   if (USE_CACHE && !cache.updateAt || Date.now() - cache.updateAt > 3600000) {
     try {
       const res = await axios.get('https://www.googleapis.com/webfonts/v1/webfonts', {
@@ -309,4 +306,3 @@ App.getInitialProps = async function () {
   }
 }
 
-export default withGA('UA-57278918-5', Router)(App)

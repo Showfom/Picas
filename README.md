@@ -1,21 +1,17 @@
-![](https://ws1.sinaimg.cn/large/006tNbRwly1fydc8lgsgrj31kw0hk0uc.jpg)
+Fork from [djyde/Picas](https://github.com/djyde/Picas)
 
-Generate Project Logo with Google Fonts
+## Install
 
-https://picas.now.sh
+Apply Google Fonts API Key from [here](https://developers.google.com/fonts/docs/developer_api).
 
-## Features
+Add `GOOGLE_FONT_API_KEY=<your_api_key>` to your `.env` file.
 
-- Automatically load Google Web Fonts
-- Retina friendly
+Then, insall and run the app:
 
-## Projects using Picas
+```bash
+npm install
+npm run build
+npm run start
+```
 
-- [Serlina](https://github.com/djyde/serlina)
-- [Rehux](https://github.com/djyde/rehux)
-
-> [I am using Picas!](https://github.com/djyde/Picas/issues/7)
-
-# License
-
-MIT License
+Finally, open your browser and navigate to `http://localhost:3000`.
