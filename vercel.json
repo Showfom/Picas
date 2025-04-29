@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "env": {
-    "GOOGLE_FONT_API_KEY": "@google-font-api-key"
-  }
+  ]
 } 
