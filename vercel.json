@@ -14,5 +14,9 @@
   ],
   "env": {
     "GOOGLE_FONT_API_KEY": "@google-font-api-key"
-  }
+  },
+  "build": {
+    "env": {
+      "GOOGLE_FONT_API_KEY": "@google-font-api-key"
+    }
 } 
